@@ -1,0 +1,20 @@
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+sudo: false
+
+before_script:
+  - pip install 'travis-cargo<0.2' --user && export PATH=$HOME/.local/bin:$PATH
+
+script:
+  - cargo build
+  - cargo build --no-default-features --features 'dummy-literal'
+  - cargo test --no-default-features --features 'dummy-literal'
+  # - travis-cargo --only nightly build --no-default-features --features 'proc-macro'
+  - travis-cargo --only nightly build --features 'i128'
+
+notifications:
+  email:
+    on_success: never

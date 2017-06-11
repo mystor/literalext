@@ -1,0 +1,16 @@
+[package]
+name = "literalext"
+version = "0.1.0"
+authors = ["Michael Layzell <michael@thelayzells.com>"]
+repository = "https://github.com/mystor/literalext"
+description = "A helper crate for interpreting proc-macro `Literal` values"
+
+[features]
+default = ["proc-macro2"]
+i128 = []
+proc-macro = []
+dummy = []
+# proc-macro2 is implicit
+
+[dependencies]
+proc-macro2 = { git = "https://github.com/alexcrichton/proc-macro2", optional = true }
