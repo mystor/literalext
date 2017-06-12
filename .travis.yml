@@ -10,8 +10,9 @@ before_script:
 
 script:
   - cargo build
-  - cargo build --no-default-features --features 'dummy-literal'
-  - cargo test --no-default-features --features 'dummy-literal'
+  - cargo build --no-default-features --features 'dummy'
+  - cargo test --no-default-features --features 'dummy'
+  # Not implemented yet
   # - travis-cargo --only nightly build --no-default-features --features 'proc-macro'
   - travis-cargo --only nightly build --features 'i128'
 
