@@ -1,4 +1,5 @@
 # `literalext`
+[![Build Status](https://travis-ci.org/mystor/literalext.svg?branch=master)](https://travis-ci.org/mystor/literalext)
 
 This crate provides extension methods to `proc-macro`, and `proc-macro2`'s
 `Literal` types. These methods provide a mechanism for extracting the value of
