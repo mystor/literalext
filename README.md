@@ -14,30 +14,30 @@ extracting the value of the type:
 ```rust
 pub trait LiteralExt {
     /// If the `Literal` is an integer literal, returns its value.
-    fn as_int(&self) -> Option<IntLit>;
+    fn parse_int(&self) -> Option<IntLit>;
 
     /// If the `Literal` is a floating point literal, returns its value.
-    fn as_float(&self) -> Option<FloatLit>;
+    fn parse_float(&self) -> Option<FloatLit>;
 
     /// If the `Literal` is a string literal, returns it's value.
-    fn as_string(&self) -> Option<String>;
+    fn parse_string(&self) -> Option<String>;
 
     /// If the `Literal` is a char literal, returns it's value.
-    fn as_char(&self) -> Option<char>;
+    fn parse_char(&self) -> Option<char>;
 
     /// If the `Literal` is a byte string literal, returns it's value.
-    fn as_bytes(&self) -> Option<Vec<u8>>;
+    fn parse_bytes(&self) -> Option<Vec<u8>>;
 
     /// If the `Literal` is a byte literal, returns it's value.
-    fn as_byte(&self) -> Option<u8>;
+    fn parse_byte(&self) -> Option<u8>;
 
     /// If the `Literal` is an inner doc comment (`//!` or `/*!`), returns a
     /// string with the text of the comment.
-    fn as_inner_doc(&self) -> Option<String>;
+    fn parse_inner_doc(&self) -> Option<String>;
 
     /// If the `Literal` is an outer doc comment (`///` or `/**`), returns a
     /// string with the text of the comment.
-    fn as_outer_doc(&self) -> Option<String>;
+    fn parse_outer_doc(&self) -> Option<String>;
 }
 ```
 

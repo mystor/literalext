@@ -11,7 +11,7 @@ fn ints() {
         };
         ($i:tt, $($f:ident),*) => {
             let dl = DummyLiteral(stringify!($i));
-            let asint = dl.as_int().expect(&format!("Unable to parse {} as an integer", stringify!($i)));
+            let asint = dl.parse_int().expect(&format!("Unable to parse {} as an integer", stringify!($i)));
             $(
                 assert_eq!(
                     asint
@@ -22,13 +22,13 @@ fn ints() {
                 );
             )*
             // NOTE: Some ints can also be parsed as floats, so we don't check that as_float fails.
-            assert_eq!(dl.as_float(), None);
-            assert_eq!(dl.as_string(), None);
-            assert_eq!(dl.as_char(), None);
-            assert_eq!(dl.as_bytes(), None);
-            assert_eq!(dl.as_byte(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_float(), None);
+            assert_eq!(dl.parse_string(), None);
+            assert_eq!(dl.parse_char(), None);
+            assert_eq!(dl.parse_bytes(), None);
+            assert_eq!(dl.parse_byte(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
@@ -60,7 +60,7 @@ fn floats() {
         };
         ($i:tt, $($f:ident),*) => {
             let dl = DummyLiteral(stringify!($i));
-            let asfloat = dl.as_float()
+            let asfloat = dl.parse_float()
                 .expect(&format!("Unable to parse {} as a float", stringify!($i)));
             $(
                 assert_eq!(
@@ -69,13 +69,13 @@ fn floats() {
                     $i
                 );
             )*
-            assert_eq!(dl.as_int(), None);
-            assert_eq!(dl.as_string(), None);
-            assert_eq!(dl.as_char(), None);
-            assert_eq!(dl.as_bytes(), None);
-            assert_eq!(dl.as_byte(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_int(), None);
+            assert_eq!(dl.parse_string(), None);
+            assert_eq!(dl.parse_char(), None);
+            assert_eq!(dl.parse_bytes(), None);
+            assert_eq!(dl.parse_byte(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
@@ -91,14 +91,14 @@ fn chars() {
     macro_rules! test_char {
         ($i:tt) => {
             let dl = DummyLiteral(stringify!($i));
-            assert_eq!(dl.as_char(), Some($i));
-            assert_eq!(dl.as_int(), None);
-            assert_eq!(dl.as_float(), None);
-            assert_eq!(dl.as_string(), None);
-            assert_eq!(dl.as_bytes(), None);
-            assert_eq!(dl.as_byte(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_char(), Some($i));
+            assert_eq!(dl.parse_int(), None);
+            assert_eq!(dl.parse_float(), None);
+            assert_eq!(dl.parse_string(), None);
+            assert_eq!(dl.parse_bytes(), None);
+            assert_eq!(dl.parse_byte(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
@@ -116,14 +116,14 @@ fn byte() {
     macro_rules! test_byte {
         ($i:tt) => {
             let dl = DummyLiteral(stringify!($i));
-            assert_eq!(dl.as_byte(), Some($i));
-            assert_eq!(dl.as_int(), None);
-            assert_eq!(dl.as_float(), None);
-            assert_eq!(dl.as_string(), None);
-            assert_eq!(dl.as_char(), None);
-            assert_eq!(dl.as_bytes(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_byte(), Some($i));
+            assert_eq!(dl.parse_int(), None);
+            assert_eq!(dl.parse_float(), None);
+            assert_eq!(dl.parse_string(), None);
+            assert_eq!(dl.parse_char(), None);
+            assert_eq!(dl.parse_bytes(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
@@ -140,14 +140,14 @@ fn string() {
     macro_rules! test_string {
         ($i:tt) => {
             let dl = DummyLiteral(stringify!($i));
-            assert_eq!(dl.as_string().unwrap(), $i);
-            assert_eq!(dl.as_int(), None);
-            assert_eq!(dl.as_float(), None);
-            assert_eq!(dl.as_char(), None);
-            assert_eq!(dl.as_bytes(), None);
-            assert_eq!(dl.as_byte(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_string().unwrap(), $i);
+            assert_eq!(dl.parse_int(), None);
+            assert_eq!(dl.parse_float(), None);
+            assert_eq!(dl.parse_char(), None);
+            assert_eq!(dl.parse_bytes(), None);
+            assert_eq!(dl.parse_byte(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
@@ -183,14 +183,14 @@ fn bytes() {
         ($i:tt) => {
             let dl = DummyLiteral(stringify!($i));
             // NOTE: We slice $i here to get it from &[u8; N] to &[u8]
-            assert_eq!(dl.as_bytes().unwrap(), &$i[..]);
-            assert_eq!(dl.as_int(), None);
-            assert_eq!(dl.as_float(), None);
-            assert_eq!(dl.as_string(), None);
-            assert_eq!(dl.as_char(), None);
-            assert_eq!(dl.as_byte(), None);
-            assert_eq!(dl.as_inner_doc(), None);
-            assert_eq!(dl.as_outer_doc(), None);
+            assert_eq!(dl.parse_bytes().unwrap(), &$i[..]);
+            assert_eq!(dl.parse_int(), None);
+            assert_eq!(dl.parse_float(), None);
+            assert_eq!(dl.parse_string(), None);
+            assert_eq!(dl.parse_char(), None);
+            assert_eq!(dl.parse_byte(), None);
+            assert_eq!(dl.parse_inner_doc(), None);
+            assert_eq!(dl.parse_outer_doc(), None);
         }
     }
 
