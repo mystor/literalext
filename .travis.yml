@@ -9,8 +9,7 @@ script:
   - cargo build
   - cargo build --no-default-features --features 'dummy'
   - cargo test --no-default-features --features 'dummy'
-  # Not implemented yet
-  # - ([ $TRAVIS_RUST_VERSION != nightly ] || cargo build --no-default-features --features 'proc-macro')
+  - ([ $TRAVIS_RUST_VERSION != nightly ] || cargo build --no-default-features --features 'proc-macro')
   - ([ $TRAVIS_RUST_VERSION != nightly ] || cargo build --features 'i128')
 
 notifications:
