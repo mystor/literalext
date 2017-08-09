@@ -109,6 +109,7 @@ fn chars() {
     test_char!('🐕'); // NOTE: This is an emoji
     test_char!('\'');
     test_char!('"');
+    test_char!('\u{1F415}');
 }
 
 #[test]
@@ -159,6 +160,7 @@ fn string() {
     test_string!("\"");
     test_string!("'");
     test_string!("");
+    test_string!("\u{1F415}");
     test_string!("This
            String contains\
            newlines and other such
