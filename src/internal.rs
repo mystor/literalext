@@ -151,7 +151,7 @@ pub(crate) fn str_lit(mut s: &str) -> Option<String> {
                         char::from_u32(byte as u32).unwrap()
                     }
                     b'u' => {
-                        let (rest, chr) = backslash_u(&s[2..]);
+                        let (rest, chr) = backslash_u(&s);
                         s = rest;
                         chr
                     }
@@ -163,7 +163,6 @@ pub(crate) fn str_lit(mut s: &str) -> Option<String> {
                     b'\'' => '\'',
                     b'"' => '"',
                     b'\r' | b'\n' => {
-                        s = &s[2..];
                         loop {
                             let ch = next_chr(s);
                             if ch.is_whitespace() {
@@ -280,7 +279,7 @@ pub(crate) fn char_lit(mut s: &str) -> Option<char> {
                     char::from_u32(byte as u32).unwrap()
                 }
                 b'u' => {
-                    let (rest, chr) = backslash_u(&s[2..]);
+                    let (rest, chr) = backslash_u(s);
                     s = rest;
                     chr
                 }
