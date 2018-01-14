@@ -1,6 +1,17 @@
 # `literalext`
 [![Build Status](https://travis-ci.org/mystor/literalext.svg?branch=master)](https://travis-ci.org/mystor/literalext)
 
+> WARNING: This crate is no longer maintained. The literal parsing logic in
+> this crate has been moved into [`syn 0.12`].
+> 
+> To get similar behaviour with `syn`, parse a [`syn::Lit`] by calling 
+> [`syn::parse2::<syn::Lit>(ts)`] or [`syn::parse_str::<syn::Lit>(s)`].
+
+[`syn 0.12`]: https://docs.rs/syn/0.12.5/syn
+[`syn::Lit`]: https://docs.rs/syn/0.12.5/syn/enum.Lit.html
+[`syn::parse2::<syn::Lit>(ts)`]: https://docs.rs/syn/0.12.5/syn/fn.parse2.html
+[`syn::parse_str::<syn::Lit>(s)`]: https://docs.rs/syn/0.12.5/syn/fn.parse_str.html
+
 This crate provides extension methods to `proc-macro`, and `proc-macro2`'s
 `Literal` types. These methods provide a mechanism for extracting the value of
 the type.
